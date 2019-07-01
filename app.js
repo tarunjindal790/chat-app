@@ -1,18 +1,23 @@
 'use strict';
 
 // Chat application dependencies
-var express 	= require('express');
-var app  		= express();
-var path 		=require('path')
-var bodyParser 	= require('body-parser');
-var flash=require("connect-flash");
-var passport=require("passport");
-var LocalStrategy=require("passport-local");
-var mongoose=require("mongoose");
-var User=require("./models/user");
+var express 	    =require('express');
+var app  			=express();
+var path 			=require('path')
+var bodyParser 		=require('body-parser');
+var flash 			=require("connect-flash");
+var passport 	    =require("passport");
+var LocalStrategy   =require("passport-local");
+var cookieSession 	=require("cookie-session");
+var keys 			=require("./config/keys");
+var mongoose 		=require("mongoose");
+var User 			=require("./models/user");
 
 app.use(flash());
-
+app.use(cookieSession({
+	maxAge:24*60*60*1000,
+	keys:[keys.session.cookieKey]
+}))
 //db setup
 
 mongoose.connect("mongodb://localhost/chat_app");
@@ -39,6 +44,8 @@ app.use(function(req,res,next){
 
 //require routes
 var indexRoutes=require('./routes/index');
+var authRoutes=require('./routes/auth');
+var profileRoutes=require('./routes/profile')
 // Set the port number
 var port = process.env.PORT || 3000;
 
@@ -53,6 +60,8 @@ app.use(express.static('public'));
 
 //routes setup
 app.use("/",indexRoutes)
+app.use("/auth",authRoutes)
+app.use("/profile",profileRoutes)
 
 
 app.listen("3000","0.0.0.0", function(){
