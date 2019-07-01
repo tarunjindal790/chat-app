@@ -5,6 +5,7 @@ Use npm install to set up.
 
 To set up google auth:
 	1. Create a file named keys.js in config folder
+	
 	2. Insert this as content
 
 		module.exports={
