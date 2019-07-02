@@ -1,0 +1,26 @@
+<% include ./partials/header%>
+
+
+<h1>Rooms:</h1>
+<h2><a href="/rooms/add/">Add Rooms</a></h2>
+
+<%rooms.forEach(function(room){%>
+	<div class="col-md-3 col-sm-6 ">
+				<div class="card">
+				<img src="<%=room.image%>" class="card-img-top">
+				<div class="card-body">
+				<h5 class="card-title text-center"><%=room.roomName%></h5>
+				<h4 class="text-center"><%=room.language%></h4>
+				<a href="#" class="btn btn-primary">Join</a>
+				
+				</div>
+			</div>
+				
+				
+				
+	</div>
+	
+<%});%>
+
+
+<% include ./partials/footer%>

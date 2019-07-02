@@ -2,9 +2,9 @@ var mongoose=require("mongoose");
 var passportLocalMongoose=require("passport-local-mongoose");
 
 var UserSchema=new mongoose.Schema({
-	username:String,
-	password:String,
-	googleId:String,
+	username:{type:String,required:true},
+	password:{type:String,default:null},
+	googleId:{type:String,default:null},
 	thumbnail:String
 });
 

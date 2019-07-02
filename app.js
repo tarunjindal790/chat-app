@@ -12,6 +12,13 @@ var cookieSession 	=require("cookie-session");
 var keys 			=require("./config/keys");
 var mongoose 		=require("mongoose");
 var User 			=require("./models/user");
+var Room 			=require("./models/room");
+
+
+//To remove all rooms
+// Room.remove({},function(err){
+// 	console.log("Removed all rooms")
+// })
 
 app.use(flash());
 app.use(cookieSession({
@@ -45,6 +52,7 @@ app.use(function(req,res,next){
 //require routes
 var indexRoutes=require('./routes/index');
 var authRoutes=require('./routes/auth');
+var roomRoutes=require('./routes/rooms')
 var profileRoutes=require('./routes/profile')
 // Set the port number
 var port = process.env.PORT || 3000;
@@ -61,6 +69,7 @@ app.use(express.static('public'));
 //routes setup
 app.use("/",indexRoutes)
 app.use("/auth",authRoutes)
+app.use("/rooms",roomRoutes)
 app.use("/profile",profileRoutes)
 
 
