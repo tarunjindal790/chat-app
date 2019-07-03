@@ -70,11 +70,10 @@ router.post("/",upload.single('roomImage'),function(req,res){
 
 })
 
-// router.post("/")
 
 router.get("/:room",function(req,res){
 	
-	res.render("rooms");
+	res.render("roomChat",{user:req.user,room:req.params.room});
 })
 
 

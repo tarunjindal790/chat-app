@@ -5,7 +5,9 @@ var express 	    =require('express');
 var app  			=express();
 var path 			=require('path')
 var bodyParser 		=require('body-parser');
+var http 			=require('http');
 var flash 			=require("connect-flash");
+var socketIO 		=require('socket.io');
 var passport 	    =require("passport");
 var LocalStrategy   =require("passport-local");
 var cookieSession 	=require("cookie-session");
@@ -13,6 +15,11 @@ var keys 			=require("./config/keys");
 var mongoose 		=require("mongoose");
 var User 			=require("./models/user");
 var Room 			=require("./models/room");
+
+
+var server=http.createServer(app);
+var io=socketIO(server);
+require('./socket/roomChat')(io);
 
 
 //To remove all rooms
@@ -73,6 +80,6 @@ app.use("/rooms",roomRoutes)
 app.use("/profile",profileRoutes)
 
 
-app.listen("3000","0.0.0.0", function(){
-   console.log("Server Has Started!");
+server.listen("3000", function(){
+   console.log("Server has started on port 3000!");
 });
