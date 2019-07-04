@@ -7,15 +7,26 @@ $(document).ready(function(){
 	socket.on('connect',function(){
 		console.log("User connected",room);
 		var params={
-			room:room
+			room:room,
+			sender:sender
 		}
 		//1.emits join event to server
 		socket.emit('join',params,function(){
 			console.log("User has joined ");
 		})
 
+
 	})
 
+
+		socket.on('onlineUsersList',function(users){
+			var ol=$('<ol></ol>');
+			for(var i=0;i<users.length;i++){
+				ol.append('<p>'+users[i]+'</p>');
+			}
+			$('#numValue').text('('+users.length+')');
+			$('#users').html(ol);
+		})
 
 
 	//5. Get the data from newMessage and insert it into ejs on
