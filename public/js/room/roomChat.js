@@ -3,12 +3,13 @@ $(document).ready(function(){
 	var socket=io();
 	var room=$('#roomName').val();
 	var sender=$('#sender').val();
-	//checks connection on client side
+	//0. checks connection on client side
 	socket.on('connect',function(){
 		console.log("User connected",room);
 		var params={
 			room:room
 		}
+		//1.emits join event to server
 		socket.emit('join',params,function(){
 			console.log("User has joined ");
 		})
@@ -17,7 +18,8 @@ $(document).ready(function(){
 
 
 
-	//from server 
+	//5. Get the data from newMessage and insert it into ejs on
+	// client side chat area using mustache template rendering  
 	socket.on('newMessage',function(data){
 		console.log(data);
 		var template=$('#message-template').html();
@@ -30,7 +32,7 @@ $(document).ready(function(){
 		$('#messages').append(message);
 	})
 
-
+	//3.Submit message and user data to server with createMessage event 
 	$('#message-form').on('submit',function(e){
 		e.preventDefault();
 		var msg=$('#msg').val();
