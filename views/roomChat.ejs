@@ -1,6 +1,7 @@
 <% include ./partials/header%>
     <title><%= room %></title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/group.css">
 
 
@@ -115,7 +116,7 @@
                               <form action="#" id="message-form" method="post">
                                   <input type="hidden" id="roomName" value="<%=room%>">
                                   <input type="hidden" id="sender" value="<%=user.username || user.fullname%>">
-                                  <textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
+                                  <textarea class="form-control" name="message" id="msg" placeholder="Type a message" data-emojiable="true"></textarea>
                                   <div class="clearfix"></div>
                                   <div class="chat_bottom">
                                       <button id="send-message" class="pull-right btn btn-primary" style="background: #4aa1f3; border: #4aa1f3; ">
@@ -190,6 +191,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/room/roomChat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
