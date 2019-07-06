@@ -115,8 +115,8 @@
                             <div class="message_write">
                               <form action="#" id="message-form" method="post">
                                   <input type="hidden" id="roomName" value="<%=room%>">
-                                  <input type="hidden" id="sender" value="<%=user.username || user.fullname%>">
-                                  <textarea class="form-control" name="message" id="msg" placeholder="Type a message" data-emojiable="true"></textarea>
+                                  <input type="hidden" id="sender" value="<%=user.username%>">
+                                  <textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
                                   <div class="clearfix"></div>
                                   <div class="chat_bottom">
                                       <button id="send-message" class="pull-right btn btn-primary" style="background: #4aa1f3; border: #4aa1f3; ">
@@ -145,7 +145,7 @@
                         <div class="gr-rightsidebar">
 
                             <div id="myModal" class="modal fade" role="dialog">
-                              <div class="modal-dialog">
+                              <div class="modal-dialog" role="document">
 
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -155,7 +155,7 @@
                                   <div class="modal-body">
                                     <form action="" method="get" id="add_friend">
                                         <input type="hidden" name="receiverName" id="receiverName" value="">
-                                        <input type="hidden" name="sender-name" id="sender-name" value="">
+                                        <input type="hidden" name="sender-name" id="sender-name" value="<%=user.username%>">
                                         <button type="submit" id="friend-add" class="btn add"><i class="fa fa-user"></i> Add Friend</button>
                                         
                                         <a id="nameLink" class="btn ">View Profile</a>
@@ -188,9 +188,12 @@
         </div>
     </div>
 
-
+<!-- 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>   -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/room/roomChat.js"></script>

@@ -22,7 +22,7 @@ $(document).ready(function(){
 		socket.on('onlineUsersList',function(users){
 			var ol=$('<ol></ol>');
 			for(var i=0;i<users.length;i++){
-				ol.append('<p>'+users[i]+'</p>');
+				ol.append('<p><a id="val" data-toggle="modal" data-target="#myModal">'+users[i]+'</a></p>');
 			}
 			$('#numValue').text('('+users.length+')');
 			$('#users').html(ol);

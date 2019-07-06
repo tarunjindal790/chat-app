@@ -22,25 +22,29 @@ passport.use(new GoogleStrategy({
 	callbackURL: "/auth/google/redirect"
 },
 function(accessToken, refreshToken, profile, done) {
-       // User.Create({ googleId: profile.id }, function (err, user) {
-       //   return done(err, user);
-       // });
        console.log(profile);
-       User.findOne({googleId:profile.id}).then((currentUser)=>{
-       	if(currentUser){
-       		console.log("user is:",currentUser);
-       		done(null,currentUser);
-       	}
-       	else{
-       		new User({
-       			username:profile.displayName,
-       			googleId:profile.id,
-                        thumbnail:profile._json.picture
-       		}).save().then((newUser)=>{
-       			console.log("new user",newUser);
-       			done(null,newUser);
-       		});		
-       	}
+       User.findOne({googleId:profile.id},function(err,user){
+       	if(!user){
+                   user=new User({
+                        username:profile.emails[0].value,
+                        googleId:profile.id,
+                        thumbnail:profile._json.picture,
+                        email:profile.emails[0].value,
+                        fullname:profile.displayName
+                   });
+                   user.save(function(err){
+                        if(err){
+                              console.log(err);
+                        }
+                        console.log(user);
+                        return done(err,user);
+                         
+                   });
+             }else{
+                   console.log(user);
+                   return done(err,user);
+             }
+       		
        });
        
    }

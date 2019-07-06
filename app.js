@@ -21,9 +21,9 @@ var io=socketIO(server);
 require('./socket/roomChat')(io);
 
 
-//To remove all rooms
-// Room.remove({},function(err){
-// 	console.log("Removed all rooms")
+// To remove all rooms/users
+// User.remove({},function(err){
+// 	console.log("Removed all users")
 // })
 
 app.use(flash());

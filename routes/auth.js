@@ -15,7 +15,10 @@ router.get("/register",function(req,res){
 })
 
 router.post("/register",function(req,res){
-	var newUser=new User({username:req.body.username});
+	var newUser=new User({
+		username:req.body.username,
+		fullname:req.body.username
+	});
 	User.register(newUser,req.body.password,function(err,user){
 		if(err){
 			req.flash("error",err.message);
@@ -43,7 +46,7 @@ router.post("/login",passport.authenticate("local",{
 
 //google auth
 router.get("/google",passport.authenticate('google',{
-	scope:['https://www.googleapis.com/auth/plus.login']
+	scope:['https://www.googleapis.com/auth/plus.login','https://www.googleapis.com/auth/userinfo.email']
 }));
 
 router.get('/google/redirect', 
