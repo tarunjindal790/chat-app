@@ -1,0 +1,49 @@
+  a {
+      all: unset;
+    }
+
+body{
+	background-image: url(bg.jpg);
+	/*background-image: linear-gradient(#00d2ff, #3a7bd5);*/
+
+    
+
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.container{
+	margin-top: 90px;
+}
+
+.main_card{
+	background: rgba(2,2,2,0.5);
+	color: #ccc;
+}
+.login{
+	font-family: Futura;
+	letter-spacing: 2px;
+    margin-top: 30px;
+	font-weight: bolder;
+	border-radius: 12px;
+}
+
+.input{
+	
+	margin-right: 80px;
+}
+
+.submit{
+	width: 70%;
+	border-radius: 20px;
+
+}
+.sign_up{
+	margin-left:24px;
+}
+
+
+

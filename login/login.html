@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>LOGIN</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	
+</head>
+
+
+
+
+
+<body >
+
+		<div class="container">
+			<div class="row">
+
+				<div class="col-sm-4">
+				</div>
+				<div class="col-sm-4 card-body shadow main_card">
+					<h4 class="card-title login"><center>LOGIN</center></h4>
+
+
+
+					<div>
+						<form action="/auth/login" method ="post">
+							<div class="form-group">
+								<label for="user">User ID:</label>
+								<input type="text" name="username" required pattern="[A-Za-z]+" class="form-control input">
+							</div>
+							<div class="form-group">
+								<label for="pwd">Password: <a href="#" ></label>
+									<input type="password" name ="password" required class="form-control input">
+								</div>
+
+
+								<div class="d-flex justify-content-center"><button type="submit" class=" btn btn-primary btn-sm  submit mb-3">Submit</button></div>
+								New Member? Sign Up now 
+								<button type="button" class="btn btn-primary sign_up" data-toggle="modal" data-target="#signup" >Sign Up</button>
+							</form>
+
+							<a class="btn btn-block btn-social btn-Facebook"><span class="fa fa-google"></span> Sign in with Google</a>
+
+
+						</div>
+
+					</div>
+					<div class="col-sm-4">
+					</div> 
+				</div>
+			</div>
+<!-- 
+			<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h1> -->
+
+
+
+
+
+		</body>
+		</html>			
