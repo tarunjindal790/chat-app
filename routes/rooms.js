@@ -153,7 +153,36 @@ router.post("/:room",function(req,res){
 					}},
 				},(err,count)=>{
 					callback(err,count);
-				})
+				});
+			}
+		},
+		function(callback){
+			if(req.body.user_Id){
+				User.findOneAndUpdate({
+					'_id':req.user_Id,
+					'request.userId':{$eq:req.body.user_Id}
+				},{
+					$pull:{request:{
+						userId:req.body.user_Id
+					}},
+					$inc:{totalRequest:-1}
+				},(err,count)=>{
+					callback(err,count);
+				});			
+			}
+		},
+		function(callback){
+			if(req.body.user_Id){
+				User.findOneAndUpdate({
+					'_id':req.body.user_Id,
+					'sentRequest.username':{$eq:req.user.username}
+				},{
+					$pull:{sentRequest:{
+						username:req.user.username
+					}}
+				},(err,count)=>{
+					callback(err,count);
+				});			
 			}
 		}
 		],(err,results)=>{

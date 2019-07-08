@@ -33,6 +33,21 @@ $(document).ready(function(){
 		});
 		$('#reload').load(location.href+' #reload');
 	});
+
+	$('document').on('click','#cancel_friend',function(){
+		var user_Id=$('#user_Id').val();
+		$.ajax({
+			url:'/rooms/'+room,
+			type:'POST',
+			data:{
+				user_Id:user_Id
+			},
+			success:function(){
+				$(this).parent().eq(1).remove();
+			}
+		});
+		$('#reload').load(location.href+' #reload');
+	});		
 	})
 
 
@@ -74,5 +89,23 @@ $(document).ready(function(){
 		});
 		$('#reload').load(location.href+' #reload');
 	});
+
+
+
+	$('#cancel_friend').on('click',function(){
+		var user_Id=$('#user_Id').val();
+		$.ajax({
+			url:'/rooms/'+room,
+			type:'POST',
+			data:{
+				user_Id:user_Id
+			},
+			success:function(){
+				$(this).parent().eq(1).remove();
+			}
+		});
+		$('#reload').load(location.href+' #reload');
+	});
+
 
 });
