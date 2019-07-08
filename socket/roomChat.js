@@ -11,6 +11,7 @@ module.exports=function(io){
 		//2.join the user to room and call console log 
 		socket.on('join',(params,callback)=>{
 			socket.join(params.room);
+			//using helpers/UserClass.js functions
 			users.AddUserData(socket.id,params.sender,params.room);
 			io.to(params.room).emit('onlineUsersList',users.GetUserList(params.room));
 			console.log(users);

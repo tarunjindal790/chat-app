@@ -20,10 +20,17 @@ $(document).ready(function(){
 
 
 		socket.on('onlineUsersList',function(users){
+			//users contains user names array returned by getuserlist function
 			var ol=$('<ol></ol>');
 			for(var i=0;i<users.length;i++){
 				ol.append('<p><a id="val" data-toggle="modal" data-target="#myModal">'+users[i]+'</a></p>');
 			}
+			$(document).on('click','#val',function(){
+				$('#name').text('@'+$(this).text());
+				$('#receiverName').val($(this).text());
+				$('#nameLink').attr('href',"/profile/"+$(this).text())
+			})
+
 			$('#numValue').text('('+users.length+')');
 			$('#users').html(ol);
 		})

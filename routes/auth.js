@@ -24,6 +24,7 @@ router.post("/register",function(req,res){
 			req.flash("error",err.message);
 			return res.redirect("/register");
 		}
+		console.log(user);
 		passport.authenticate("local")(req,res,function(){
 			req.flash("success","Welcome to my chat app "+user.username);
 			res.redirect("/");

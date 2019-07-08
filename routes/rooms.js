@@ -3,7 +3,9 @@ var router=express.Router();
 var multer=require("multer");
 var cloudinary=require('cloudinary');
 var mongoose=require('mongoose');
-var keys=require('../config/keys')
+var keys=require('../config/keys');
+var User=require('../models/user');
+var async=require('async');
 
 var Room=require('../models/room');
 
@@ -31,7 +33,9 @@ cloudinary.config({
 
 router.get("/",function(req,res){
 	Room.find({},function(err,allRooms){
-		res.render("rooms",{rooms:allRooms})
+			res.render("rooms",{rooms:allRooms})
+		
+		
 	})
 })
 
@@ -71,10 +75,109 @@ router.post("/",upload.single('roomImage'),function(req,res){
 })
 
 
-router.get("/:room",function(req,res){
-	
-	res.render("roomChat",{user:req.user,room:req.params.room});
+router.post("/:room",function(req,res){
+	async.parallel([
+		function(callback){
+			if(req.body.receiverName){
+				User.findOneAndUpdate({
+					$and:[{
+					'username':req.body.receiverName,
+					'request.username':{$ne:req.user.username},
+					'friendList.friendName':{$ne:req.user.username}
+					}]
+					
+				},
+				{
+					$push:{request:{
+						userId:req.user._id,
+						username:req.user.username
+					}},
+					$inc:{totalRequest:1}
+				},(err,count)=>{
+					callback(err,count);
+				})
+			}
+		},
+		function(callback){
+			if(req.body.receiverName){
+				User.findOneAndUpdate({
+					'username':req.user.username,
+					'sentRequest.username':{$ne:req.body.receiverName}
+				},
+				{
+					$push:{sentRequest:{
+						username:req.body.receiverName
+					}}
+				},(err,count)=>{
+					callback(err,count);
+				})
+			}
+		}
+		],(err,results)=>{
+			res.redirect('/rooms/'+req.params.name);
+		});
+
+	async.parallel([
+		function(callback){
+			if(req.body.senderId){
+				User.findOneAndUpdate({
+					'_id':req.user._id,
+					'friendsList.friendName':{$ne:req.body.senderName}
+				},{
+					$push:{friendsList:{
+						friendId:req.body.senderId,
+						friendName:req.body.senderName
+					}},
+					$pull:{request:{
+						userId:req.body.senderId,
+						username:req.body.senderName
+					}},
+					$inc:{totalRequest:-1}
+				},(err,count)=>{
+					callback(err,count);
+				})
+			}
+		},
+		function(callback){
+			if(req.body.senderId){
+				User.findOneAndUpdate({
+					'_id':req.body.senderId,
+					'friendsList.friendName':{$ne:req.user.username}
+				},{
+					$push:{friendsList:{
+						friendId:req.user._id,
+						friendName:req.user.username
+					}},
+					$pull:{sentRequest:{
+						username:req.user.username
+					}},
+				},(err,count)=>{
+					callback(err,count);
+				})
+			}
+		}
+		],(err,results)=>{
+			res.redirect('/rooms/'+req.params.name);
+		})
+
 })
+
+router.get("/:room",function(req,res){
+	async.parallel([
+		function(callback){
+			User.findOne({'username':req.user.username})
+			.populate('request.userId')
+			.exec((err,result)=>{
+				callback(err,result);
+			})
+		}
+		],(err,results)=>{
+			var result1=results[0];
+			console.log(result1);
+				res.render("roomChat",{user:req.user,room:req.params.room,data:result1});
+		});
+});
+
 
 
 module.exports=router;

@@ -5,6 +5,7 @@ var app  			=express();
 var path 			=require('path')
 var bodyParser 		=require('body-parser');
 var http 			=require('http');
+var async 			=require('async');
 var flash 			=require("connect-flash");
 var socketIO 		=require('socket.io');
 var passport 	    =require("passport");
@@ -19,7 +20,7 @@ var Room 			=require("./models/room");
 var server=http.createServer(app);
 var io=socketIO(server);
 require('./socket/roomChat')(io);
-
+require('./socket/friend')(io);
 
 // To remove all rooms/users
 // User.remove({},function(err){

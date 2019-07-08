@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a href="/" class="navbar-brand">ChatApp!</a>
+		
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav ml-auto" id="reload">
+				<%if(!currentUser){%>
+				<li class="nav-item">
+					<a href="/auth/login" class="nav-link">Login</a>
+				</li>
+				<li class="nav-item">
+					<a href="/auth/register" class="nav-link">Sign Up</a>
+				</li>
+				<%}else{%>
+				<li class="nav-item">
+					<a href="#" class="nav-link">Signed in as <%=currentUser.username%></a>
+				</li>	
+				<li class="nav-item">
+					<a href="/auth/logout" class="nav-link">Log Out</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon fa fa-bell nav-glyphicon"></span><b class="caret"></b>
+						<%if(data.totalRequest<=0){ %>
+
+					<%}else{ %>
+						<span class="label label-primary nav-label-icon"><%=data.totalRequest%></span>
+					<%}%>
+					</a>
+					
+					<div class="dropdown-menu">
+							<div class="dropdown-item navbar-login" id="requestBar">
+								<div class="col-md-12">
+									<%if(data.totalRequest>0){ %>
+					<%data.request.forEach(function(request){%>
+									<div class="row">
+										<div class="dropdown-tag">
+											<h3 class="text-center dropdown-tag-head" >
+												Friend Requests
+											</h3>
+										</div>
+									</div>
+								</div>
+
+								<div class="dropdown-item col-md-12">
+									<div class="row">
+										<div class="col-md-3">
+											<p class="text-center">
+												<img src="https://placehold.it/300x300" class="img-circle img-fluid dropdown-img" />
+											</p>
+										</div>
+										<div class="col-md-9 pleft-0">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="col-md-12">
+														<p class="text-left">
+															<strong id=""><%=request.username%></strong>
+														</p>
+													</div>
+													<div class="dropdown-item col-md-12">
+														<div class="row">
+															<div class="col-md-6 col-sm-6 col-xs-6">
+																<input type="hidden" name="senderId" id="senderId" value="<%=request.userId._id%>">
+																<input type="hidden" name="senderName" id="senderName" value="<%=request.username%>">
+																<button type="submit" name="accept" id="accept_friend" class="btn btn-default drop-accept accept"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+															</div>
+															<div class="col-md-6 col-sm-6 col-xs-6">
+																<input type="hidden" name="user_Id" id="user_Id" value="<%=request.userId._id%>">
+																<button type="submit" name="cancel" class="btn drop-cancel remove" id="cancel_friend">
+																	<i class="fa fa-times" aria-hidden="true"></i> Reject
+																</button>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<hr />
+									<%});%>
+					<%}else{%>
+						<p class="text-center">No friend request</p>
+					<%}%>
+								</div>
+							</div>
+
+					</div>
+					
+				</li>
+				<li class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">Action</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Separated link</a>
+					</div>
+				</li>	
+				<%}%>
+				
+
+			</ul>
+		</div>
+	</nav>
+
