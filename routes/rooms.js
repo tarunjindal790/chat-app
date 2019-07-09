@@ -58,6 +58,29 @@ router.get("/",function(req,res){
 	// })
 })
 
+router.post("/",function(req,res){
+	async.parallel([
+			function(callback){
+				 Room.updateOne({
+				 	'_id':req.body.id,
+				 	'members.username':{$ne:req.user.username}
+				 },{
+				 	$push:{members:{
+				 		username:req.user.username,
+				 		email:req.user.email
+				 	}}
+				 },(err,count)=>{
+				 	console.log(count);
+				 	callback(err,count);
+				 }
+				 )
+			}
+		],(err,results)=>{
+				 	console.log(results);
+				 	res.redirect('/rooms');
+				 });
+})
+
 router.get("/add",function(req,res){
 	async.parallel([
 		function(callback){

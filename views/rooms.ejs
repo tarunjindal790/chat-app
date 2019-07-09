@@ -6,13 +6,17 @@
 <h2><a href="/rooms/add/">Add Rooms</a></h2>
 
 <%rooms.forEach(function(room){%>
+<form action="/rooms/" method="POST" id="member">
 	<div class="col-md-3 col-sm-6 ">
 				<div class="card">
-				<img src="<%=room.image%>" class="card-img-top">
+				<a href="/rooms/<%=room.roomName%>" ><img src="<%=room.image%>" class="card-img-top"></a>
 				<div class="card-body">
-				<h5 class="card-title text-center"><%=room.roomName%></h5>
+				<h5 class="card-title text-center"><%=room.roomName%>(<%=room.members.length%>)</h5>
 				<h4 class="text-center"><%=room.language%></h4>
-				<a href="/rooms/<%=room.roomName%>" class="btn btn-primary">Join</a>
+				<a href="/rooms/<%=room.roomName%>" class="btn btn-primary">Chat</a>
+				<input type="hidden" name="id" id="id" value="<%=room._id%>">
+				<input type="hidden" name="roomName" id="roomName" value="<%=room.roomName%>">
+				<a href="/rooms/<%=room.roomName%>"><button class="btn btn-primary">Join as Member</button></a>
 				
 				</div>
 			</div>
@@ -20,8 +24,12 @@
 				
 				
 	</div>
-	
+	</form>
 <%});%>
 
-
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/room/rooms.js"></script>
 <% include ./partials/footer%>

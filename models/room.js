@@ -7,10 +7,6 @@ var RoomSchema=new mongoose.Schema({
 	members:[{
 		username:String,
 		email:String
-	}],
-	members:[{
-		username:String,
-		email:String
 	}]
 
 })
