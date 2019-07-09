@@ -1,3 +1,6 @@
+<% include ./partials/header%>
+<% include ./partials/navbar%>
+
 <form action="/rooms" method="POST" enctype="multipart/form-data">
 	<label for="room-name">Room Name</label>
 	<input id="room-name" type="text" name="roomName">
@@ -7,3 +10,5 @@
 	<input type="file" id="room-image" name="roomImage" accept="image/*">
 	<input type="submit">
 </form>
+
+<% include ./partials/footer%>

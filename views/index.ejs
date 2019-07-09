@@ -1,11 +1,14 @@
 <% include ./partials/header%>
+<% include ./partials/navbar%>
 
-<h1>Hello</h1>
 <h2><a href="/profile/">Profile</a></h2>
-
+<h2><a href="/rooms">Rooms</a></h2>
 <a href="/auth/login">Login</a><br>
 <a href="/auth/register">Signup</a><br>
 
 <a href="/auth/google">Login with Google</a><br>
 
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/room/sendRequest.js"></script>
 <% include ./partials/footer%>

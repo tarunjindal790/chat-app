@@ -1,9 +1,63 @@
 <% include ./partials/header%>
-<h1>Login</h1>
-
+<!-- <h1>Login</h1> -->
+<!-- 
 <form action="/auth/login" method="POST">
 	<input type="text" name="username" placeholder="username">
 	<input type="password" name="password" placeholder="password">
 	<button>Submit</button>
-</form>
+</form> -->
+
+<link rel="stylesheet" href="/css/login.css">
+<!-- 
+<div class="container">
+			<div class="row">
+
+				<div class="col-sm-4">
+				</div>
+				<div class="col-sm-4 card-body shadow main_card">
+					<h4 class="card-title login"><center>LOGIN</center></h4>
+
+
+
+					<div>
+						<form action="/auth/login" method ="post">
+							<div class="form-group">
+								<label for="user">User ID:</label>
+								<input type="text" name="username" required pattern="[A-Za-z]+" class="form-control input">
+							</div>
+							<div class="form-group">
+								<label for="pwd">Password: <a href="#" ></label>
+									<input type="password" name ="password" required class="form-control input">
+								</div>
+
+
+								<div class="d-flex justify-content-center"><button type="submit" class=" btn btn-primary btn-sm  submit mb-3">Submit</button></div>
+								New Member? Sign Up now 
+								<button type="button" class="btn btn-primary sign_up" data-toggle="modal" data-target="#signup" >Sign Up</button>
+							</form>
+
+							<a href="/auth/google" class="btn btn-block btn-social btn-Facebook"><span class="fa fa-google"></span> Sign in with Google</a>
+
+
+						</div>
+
+					</div>
+					<div class="col-sm-4">
+					</div> 
+				</div>
+			</div>	 -->
+
+
+   <div class="login-dark">
+        <form method="post" action="/auth/login">
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="far fa-star-half"></i></div>
+            <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Username"></div>
+            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a href="/auth/register" class="forgot">Not a member? <strong><span style="text-decoration: underline;">Sign up Now</span></strong></a>
+            <div class="text-center" style="margin: 15px;"><a href="/auth/google"><button href="/auth/google" class="btn btn-outline-light" type="button"><i class="fa fa-google"></i>&nbsp;Google</button></a></div>
+        </form>
+    </div>
+
+
 <% include ./partials/footer%>

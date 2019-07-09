@@ -32,15 +32,53 @@ cloudinary.config({
 
 
 router.get("/",function(req,res){
-	Room.find({},function(err,allRooms){
-			res.render("rooms",{rooms:allRooms})
-		
-		
-	})
+	async.parallel([
+		function(callback){
+				if(req.user){
+					User.findOne({'username':req.user.username})
+					.populate('request.userId')
+					.exec((err,result)=>{
+						callback(err,result);
+					})	
+				}
+		},
+
+		function(callback){
+			Room.find({},function(err,allRooms){
+				callback(err,allRooms);
+			})
+		}
+		],(err,results)=>{
+			var result1=results[0];
+			var allRooms=results[1];
+			res.render("rooms",{rooms:allRooms,data:result1});
+		})
+	// Room.find({},function(err,allRooms){
+	// 	res.render("rooms",{rooms:allRooms})
+	// })
 })
 
 router.get("/add",function(req,res){
-	res.render("addRoom")
+	async.parallel([
+		function(callback){
+			if(req.user){
+
+
+			User.findOne({'username':req.user.username})
+			.populate('request.userId')
+			.exec((err,result)=>{
+				callback(err,result);
+			})
+		}else{
+			res.render("addRoom");
+		}
+		}
+		],(err,results)=>{
+			var result1=results[0];
+			// console.log(result1);
+			res.render("addRoom",{data:result1});
+		});
+	
 })
 
 router.post("/",upload.single('roomImage'),function(req,res){
@@ -81,9 +119,9 @@ router.post("/:room",function(req,res){
 			if(req.body.receiverName){
 				User.findOneAndUpdate({
 					$and:[{
-					'username':req.body.receiverName,
-					'request.username':{$ne:req.user.username},
-					'friendList.friendName':{$ne:req.user.username}
+						'username':req.body.receiverName,
+						'request.username':{$ne:req.user.username},
+						'friendList.friendName':{$ne:req.user.username}
 					}]
 					
 				},
@@ -203,7 +241,7 @@ router.get("/:room",function(req,res){
 		],(err,results)=>{
 			var result1=results[0];
 			console.log(result1);
-				res.render("roomChat",{user:req.user,room:req.params.room,data:result1});
+			res.render("roomChat",{user:req.user,room:req.params.room,data:result1});
 		});
 });
 
