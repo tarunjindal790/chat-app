@@ -9,7 +9,7 @@ router.get("/",function(req,res){
 		
 		function(callback){
 			if(req.user){
-			console.log(req.user);
+			// console.log(req.user);
 			User.findOne({'username':req.user.username})
 			.populate('request.userId')
 			.exec((err,result)=>{
@@ -21,8 +21,8 @@ router.get("/",function(req,res){
 		}
 		],(err,results)=>{
 			var result1=results[0];
-			console.log(result1);
-			res.render("index",{data:result1});
+			// console.log(result1);
+			res.render("index",{data:result1,user:req.user});
 		});
 
 	// res.render("index");

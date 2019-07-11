@@ -14,14 +14,14 @@ module.exports=function(io){
 			//using helpers/UserClass.js functions
 			users.AddUserData(socket.id,params.sender,params.room);
 			io.to(params.room).emit('onlineUsersList',users.GetUserList(params.room));
-			console.log(users);
+			// console.log(users);
 			callback();
 		})
 
 		//4. Listen for createMessage and transmit this message data
 		// to all users in same room through newMessage event
 		socket.on('createMessage',(message,callback)=>{
-			console.log(message);
+			// console.log(message);
 			//io.to sends event to all users including itself
 			io.to(message.room).emit('newMessage',{
 				text:message.text,

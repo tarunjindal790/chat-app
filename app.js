@@ -15,13 +15,15 @@ var keys 			=require("./config/keys");
 var mongoose 		=require("mongoose");
 var User 			=require("./models/user");
 var Room 			=require("./models/room");
+var {Global}        =require('./helpers/Global');
+var _ 				=require('lodash');	
 
 
 var server=http.createServer(app);
 var io=socketIO(server);
 require('./socket/roomChat')(io);
 require('./socket/friend')(io);
-
+require('./socket/globalRoom')(io,Global,_);
 // To remove all rooms/users
 // User.remove({},function(err){
 // 	console.log("Removed all users")

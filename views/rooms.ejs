@@ -4,7 +4,8 @@
 
 <h1>Rooms:</h1>
 <h2><a href="/rooms/add/">Add Rooms</a></h2>
-
+<input type="hidden" id="name-user" value="<%=user.username%>">
+<input type="hidden" id="name-image" value="<%=user.thumbnail%>">
 <%rooms.forEach(function(room){%>
 <form action="/rooms/" method="POST" id="member">
 	<div class="col-md-3 col-sm-6 ">
@@ -32,4 +33,5 @@
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <script src="/js/room/rooms.js"></script>
+<script src="/js/global.js"></script>
 <% include ./partials/footer%>

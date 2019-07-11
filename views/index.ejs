@@ -3,12 +3,19 @@
 
 <h2><a href="/profile/">Profile</a></h2>
 <h2><a href="/rooms">Rooms</a></h2>
+<%if(user){%>
+<input type="hidden" id="name-user" value="<%=user.username%>">
+<input type="hidden" id="name-image" value="<%=user.thumbnail%>">
+<%}%>
 <a href="/auth/login">Login</a><br>
 <a href="/auth/register">Signup</a><br>
 
 <a href="/auth/google">Login with Google</a><br>
 
-
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/room/sendRequest.js"></script>
 <% include ./partials/footer%>

@@ -9,7 +9,8 @@
 </head>
 
 <body>
-
+<input type="hidden" id="name-user" value="<%=user.username%>">
+<input type="hidden" id="name-image" value="<%=user.thumbnail%>">
     <div class="col-md-12">
         
 
@@ -66,7 +67,12 @@
                                                         Online Friends <span id="numOfFriends"></span>
                                                     </p>
                                                     <hr style="margin-top:10px" />
-                                                    
+                                                    <%if(data.friendsList.length>0){%>
+                                                        <%data.friendsList.forEach(function(friend){%>
+                                                             <div class="friend" hidden>@<%=friend.friendName%></div>
+                                                        <%})%>
+                                                    <%}%>
+
                                                     <div class="onlineFriends"></div>
 
                                                 </div>
@@ -201,6 +207,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/room/roomChat.js"></script>
 <script src="/js/room/sendRequest.js"></script>
-
+<script src="/js/global.js"></script>
 </body>
 </html>

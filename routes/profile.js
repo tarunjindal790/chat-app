@@ -30,7 +30,7 @@ router.get("/",authCheck,(req,res)=>{
 		}
 		],(err,results)=>{
 			var result1=results[0];
-			console.log(result1);
+			// console.log(result1);
 				res.render("profile",{user:req.user,data:result1});
 		});
 	// res.render("profile",{user:req.user})
