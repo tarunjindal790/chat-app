@@ -11,6 +11,25 @@ class Global{
 		return user;
 	}
 
+	RemoveUser(id){
+		
+		var user=this.GetUser(id);
+		//if the user exist then filter all elements except the one
+		//that is to be removed
+		if(user){
+			this.users=this.globalRoom.filter((user)=>user.id!==id);
+		}
+		return user;
+	}
+
+	GetUser(id){
+		//filters user with given id and return 0th value i.e socketid of the user
+		var getUser=this.globalRoom.filter((users)=>{
+			return users.id===id;
+		})[0];
+		return getUser;
+	}
+
 
 
 	GetRoomList(room){

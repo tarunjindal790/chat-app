@@ -12,5 +12,17 @@ module.exports=function(io,Global,_){
 
 			io.to(global.room).emit('loggedInUser',arr); 
 		});
+	
+	socket.on('disconnect',()=>{
+		var user=clients.RemoveUser(socket.id);
+		if(user){
+			var userData=clients.GetRoomList(user.room);
+			var arr=_.uniqBy(userData,'name');
+			var removeData=_.remove(arr,{'name':user.name});
+			io.to(user.room).emit('loggedInUser',arr);
+
+		}
+	})
+
 	});
 }
