@@ -51,7 +51,16 @@ router.get("/",function(req,res){
 		],(err,results)=>{
 			var result1=results[0];
 			var allRooms=results[1];
-			res.render("rooms",{rooms:allRooms,data:result1});
+			if(result1){
+				console.log(result1);
+				res.render("rooms",{rooms:allRooms,data:result1,user:req.user});
+			}else{
+				console.log("here");
+				res.render("rooms",{rooms:allRooms});
+			}
+			
+
+			
 		})
 	// Room.find({},function(err,allRooms){
 	// 	res.render("rooms",{rooms:allRooms})
@@ -70,13 +79,13 @@ router.post("/",function(req,res){
 				 		email:req.user.email
 				 	}}
 				 },(err,count)=>{
-				 	console.log(count);
+				 	// console.log(count);
 				 	callback(err,count);
 				 }
 				 )
 			}
 		],(err,results)=>{
-				 	console.log(results);
+				 	// console.log(results);
 				 	res.redirect('/rooms');
 				 });
 })
@@ -115,7 +124,7 @@ router.post("/",upload.single('roomImage'),function(req,res){
 			var imageUrl;
 			cloudinary.v2.uploader.upload(req.file.path,function(err,result){
 				imageUrl=result.secure_url;
-				console.log(imageUrl);
+				// console.log(imageUrl);
 				newRoom=({
 					roomName:req.body.roomName,
 					language:req.body.roomLanguage,
@@ -144,7 +153,7 @@ router.post("/:room",function(req,res){
 					$and:[{
 						'username':req.body.receiverName,
 						'request.username':{$ne:req.user.username},
-						'friendList.friendName':{$ne:req.user.username}
+						'friendsList.friendName':{$ne:req.user.username}
 					}]
 					
 				},
@@ -263,7 +272,7 @@ router.get("/:room",function(req,res){
 		}
 		],(err,results)=>{
 			var result1=results[0];
-			console.log(result1);
+			// console.log(result1);
 			res.render("roomChat",{user:req.user,room:req.params.room,data:result1});
 		});
 });
