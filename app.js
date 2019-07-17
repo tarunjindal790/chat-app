@@ -24,6 +24,7 @@ var io=socketIO(server);
 require('./socket/roomChat')(io);
 require('./socket/friend')(io);
 require('./socket/globalRoom')(io,Global,_);
+require('./socket/privatemessage')(io);
 // To remove all rooms/users
 // User.remove({},function(err){
 // 	console.log("Removed all users")
@@ -61,8 +62,9 @@ app.use(function(req,res,next){
 //require routes
 var indexRoutes=require('./routes/index');
 var authRoutes=require('./routes/auth');
-var roomRoutes=require('./routes/rooms')
-var profileRoutes=require('./routes/profile')
+var roomRoutes=require('./routes/rooms');
+var profileRoutes=require('./routes/profile');
+var privateChatRoutes=require('./routes/privateChat');
 // Set the port number
 var port = process.env.PORT || 3000;
 
@@ -80,6 +82,7 @@ app.use("/",indexRoutes)
 app.use("/auth",authRoutes)
 app.use("/rooms",roomRoutes)
 app.use("/profile",profileRoutes)
+app.use("/chat",privateChatRoutes)
 
 
 server.listen("3000", function(){
