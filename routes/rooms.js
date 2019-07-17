@@ -8,6 +8,7 @@ var User=require('../models/user');
 var async=require('async');
 
 var Room=require('../models/room');
+var Group=require('../models/roommessage');
 
 
 //for image upload feature
@@ -52,7 +53,7 @@ router.get("/",function(req,res){
 			var result1=results[0];
 			var allRooms=results[1];
 			if(result1){
-				console.log(result1);
+				
 				res.render("rooms",{rooms:allRooms,data:result1,user:req.user});
 			}else{
 				console.log("here");
@@ -82,13 +83,16 @@ router.post("/",function(req,res){
 				 	// console.log(count);
 				 	callback(err,count);
 				 }
-				 )
+				 ) 
 			}
-		],(err,results)=>{
+			],(err,results)=>{
 				 	// console.log(results);
 				 	res.redirect('/rooms');
 				 });
-})
+
+
+
+});
 
 router.get("/add",function(req,res){
 	async.parallel([
@@ -259,6 +263,30 @@ router.post("/:room",function(req,res){
 			res.redirect('/rooms/'+req.params.name);
 		})
 
+
+
+
+			async.parallel([
+			function(callback){
+				if(req.body.message){
+					var group = new Group();
+					group.sender = req.user._id;
+					group.body = req.body.message;
+					group.name = req.body.roomName;
+					group.createdAt = new Date();
+
+					group.save((err, msg)=>{
+						console.log(msg);
+						callback(err, msg);
+						
+					})
+
+				}
+			}
+			], (err, results) => {
+				res.redirect('/rooms/'+req.params.name);
+			});
+
 })
 
 router.get("/:room",function(req,res){
@@ -269,11 +297,21 @@ router.get("/:room",function(req,res){
 			.exec((err,result)=>{
 				callback(err,result);
 			})
+		},
+		function(callback){
+			Group.find({})
+				 .populate('sender')
+				 .exec((err, result)=>{
+				 	callback(err, result);
+				 })
+
 		}
 		],(err,results)=>{
 			var result1=results[0];
+			var result2=results[1];
+
 			// console.log(result1);
-			res.render("roomChat",{user:req.user,room:req.params.room,data:result1});
+			res.render("roomChat",{user:req.user,room:req.params.room,data:result1, roomMsg: result2});
 		});
 });
 

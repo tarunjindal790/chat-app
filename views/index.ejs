@@ -1,6 +1,7 @@
 <% include ./partials/header%>
 <% include ./partials/navbar%>
 
+
 <h2><a href="/profile/">Profile</a></h2>
 <h2><a href="/rooms">Rooms</a></h2>
 <%if(user){%>
@@ -16,6 +17,14 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/room/sendRequest.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+   <script src="/js/deparam.js"></script>
+  <script src="/js/room/sendRequest.js"></script>
+  <script src="/js/global.js"></script>
+  <script src="/js/messagelink.js"></script>
+ 
+
+
+
+
 <% include ./partials/footer%>

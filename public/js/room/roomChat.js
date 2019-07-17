@@ -60,6 +60,19 @@ $(document).ready(function(){
 			sender:sender
 		},function(){
 			$('#msg').val('');
+		});
+
+
+		$.ajax({
+			url:'/rooms/'+room,
+			type: 'POST',
+			data:{
+				message:msg,
+				roomName:room
+			},
+			success: function(){
+				$('#msg').val('');
+			}
 		})
 	})
 
